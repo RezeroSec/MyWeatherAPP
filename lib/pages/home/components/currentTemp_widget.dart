@@ -1,8 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:weather_app/components/CustomButton.dart';
 import 'package:weather_app/utils/utilColors.dart';
 import 'package:weather_app/utils/utilString.dart';
 
+import 'dailyWeatherView.dart';
 import 'slideDots_widget.dart';
 import 'tempWidgetIcon_widget.dart';
 
@@ -27,18 +29,22 @@ class CurrentTemp extends StatefulWidget {
 }
 
 class _CurrentTempState extends State<CurrentTemp> {
-  int _currentPage = 0;
   final PageController _pageController = PageController(initialPage: 0);
+  List<bool> isBottomIconTap = [false, false];
 
-  _onPageChanged(int index) {
+  void _onItemTapped(int index) {
     setState(() {
-      _currentPage = index;
+      isBottomIconTap = [false, false];
+      isBottomIconTap[index] = true;
+      _pageController.animateToPage(index,
+          duration: Duration(milliseconds: 500), curve: Curves.easeOut);
     });
   }
 
   @override
   void initState() {
     super.initState();
+    isBottomIconTap[0] = true;
   }
 
   @override
@@ -54,11 +60,7 @@ class _CurrentTempState extends State<CurrentTemp> {
         weatherIcon: widget.weatherIcon,
         temp: widget.temp,
       ),
-      Container(
-        width: double.maxFinite,
-        height: double.maxFinite,
-        child: Text("ini berpindah"),
-      ),
+      DailyWeatherView(),
     ];
     return Column(
       children: [
@@ -94,17 +96,12 @@ class _CurrentTempState extends State<CurrentTemp> {
             overflow: TextOverflow.ellipsis,
           ),
         ),
-        // Expanded(
-        //   flex: 1,
-        //   child: Container(),
-        // ),
         Expanded(
           flex: 18,
           child: PageView(
-            scrollDirection: Axis.horizontal,
+            physics: NeverScrollableScrollPhysics(),
             controller: _pageController,
             children: ViewWidget,
-            onPageChanged: (index) => _onPageChanged(index),
           ),
         ),
         Expanded(
@@ -113,9 +110,39 @@ class _CurrentTempState extends State<CurrentTemp> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text(widget.slideName),
-                for (int i = 0; i < ViewWidget.length; i++)
-                  if (i == _currentPage) SlideDots(true) else SlideDots(false)
+                CustomButton(
+                  height: 30,
+                  width: 60,
+                  bgColor: isBottomIconTap[0] ? Colors.green : Colors.white,
+                  borderColor: Colors.green,
+                  widthBorder: 1,
+                  child: Text(
+                    "current",
+                    style: TextStyle(
+                      color: isBottomIconTap[0] ? Colors.white : Colors.green,
+                    ),
+                  ),
+                  onTap: () {
+                    _onItemTapped(0);
+                  },
+                ),
+                SizedBox(width: 10),
+                CustomButton(
+                  height: 30,
+                  width: 60,
+                  bgColor: isBottomIconTap[1] ? Colors.green : Colors.white,
+                  borderColor: Colors.green,
+                  widthBorder: 1,
+                  child: Text(
+                    "daily",
+                    style: TextStyle(
+                      color: isBottomIconTap[1] ? Colors.white : Colors.green,
+                    ),
+                  ),
+                  onTap: () {
+                    _onItemTapped(1);
+                  },
+                ),
               ],
             ),
           ),

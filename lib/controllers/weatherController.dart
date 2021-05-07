@@ -3,18 +3,24 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:weather_app/api/weather_api_client.dart';
 import 'package:weather_app/models/currentWeather.dart';
-import 'package:weather_app/models/hourlyWeather.dart';
 
 class WeatherController extends GetxController {
   d.Dio dio = d.Dio();
 
   var isInternetNetworkSuccess = true.obs;
   var currentWeather = CurrentWeather().obs;
-  var listHourlyWeather = <HourlyWeather>[].obs;
+
   var listTime = [].obs;
   var listWeather = [].obs;
   var listWeatherIcon = [].obs;
   var listTemp = [].obs;
+
+  var listDailyDay = [].obs;
+  var listDailyDate = [].obs;
+  var listDailyWeatherIcon = [].obs;
+  var listDailyTempMax = [].obs;
+  var listDailyTempMin = [].obs;
+  var listDailyWindSpeed = [].obs;
 
   double longitude = 105.307265;
   double latitude = -5.117839;
@@ -41,17 +47,18 @@ class WeatherController extends GetxController {
   }
 
   Future<void> get7DailyWeather(double latitude, double longitude) async {
-    listHourlyWeather.clear();
     try {
       d.Response response =
           await dio.get(Api.get7DaysWeather(latitude, longitude));
       if (response.statusCode == 200) {
         isInternetNetworkSuccess.value = true;
-        print("# data => ${response.data["current"]}");
+        // print("# data => ${response.data["current"]}");
+        // get current waeather
         CurrentWeather tempCurrentWeather =
             CurrentWeather.fromMap(response.data["current"]);
         currentWeather.value = tempCurrentWeather;
 
+        // get hourly weather
         await Future.forEach(response.data["hourly"], (item) async {
           var date = DateFormat("H:mm")
               .format(DateTime.fromMillisecondsSinceEpoch(item["dt"] * 1000));
@@ -59,6 +66,20 @@ class WeatherController extends GetxController {
           listWeather.add(item["weather"][0]["main"]);
           listWeatherIcon.add(item["weather"][0]["icon"]);
           listTemp.add(item["temp"]);
+        });
+
+        // get daily Weather
+        await Future.forEach(response.data["daily"], (item) async {
+          var day = DateFormat("EEE")
+              .format(DateTime.fromMillisecondsSinceEpoch(item["dt"] * 1000));
+          var date = DateFormat("d/M")
+              .format(DateTime.fromMillisecondsSinceEpoch(item["dt"] * 1000));
+          listDailyDay.add(day);
+          listDailyDate.add(date);
+          listDailyWeatherIcon.add(item["weather"][0]["icon"]);
+          listDailyTempMax.add(item["temp"]["max"]);
+          listDailyTempMin.add(item["temp"]["min"]);
+          listDailyWindSpeed.add(item["wind_speed"]);
         });
       }
     } on d.DioError catch (ex) {

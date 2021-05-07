@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:weather_app/controllers/weatherController.dart';
 
 class LocationController extends GetxController {
-  // final WeatherController weatherController = Get.put(WeatherController());
+
   var x = "".obs;
   LocationPermission _permission;
   bool _looping = true;
