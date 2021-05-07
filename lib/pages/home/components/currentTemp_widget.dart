@@ -5,7 +5,6 @@ import 'package:weather_app/utils/utilColors.dart';
 import 'package:weather_app/utils/utilString.dart';
 
 import 'dailyWeatherView.dart';
-import 'slideDots_widget.dart';
 import 'tempWidgetIcon_widget.dart';
 
 class CurrentTemp extends StatefulWidget {
@@ -64,16 +63,33 @@ class _CurrentTempState extends State<CurrentTemp> {
     ];
     return Column(
       children: [
-        Expanded(
-          flex: 3,
+        Container(
+          height: 40,
+          width: double.maxFinite,
+          padding: EdgeInsets.symmetric(horizontal: 10),
+          alignment: Alignment.center,
           child: AutoSizeText(
             widget.location,
             style: TextStyle(
               color: UtilColors.secondColor,
               fontWeight: FontWeight.bold,
             ),
-            presetFontSizes: [UtilString.fontSizeLocation, 33, 31, 29, 27, 25],
-            maxLines: 1,
+            presetFontSizes: [
+              UtilString.fontSizeLocation,
+              25,
+              24,
+              23,
+              22,
+              21,
+              20,
+              19,
+              18,
+              17,
+              16,
+              15
+            ],
+            textAlign: TextAlign.center,
+            maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
         ),
