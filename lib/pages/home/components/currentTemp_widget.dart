@@ -6,12 +6,12 @@ import 'package:weather_app/utils/utilString.dart';
 import 'slideDots_widget.dart';
 import 'tempWidgetIcon_widget.dart';
 
-
 class CurrentTemp extends StatefulWidget {
   final String location;
   final String weatherDesc;
   final String weatherIcon;
   final String temp;
+  final String slideName;
 
   const CurrentTemp({
     Key key,
@@ -19,6 +19,7 @@ class CurrentTemp extends StatefulWidget {
     this.weatherDesc = "none",
     this.weatherIcon,
     this.temp = "0",
+    this.slideName = "",
   }) : super(key: key);
 
   @override
@@ -81,7 +82,14 @@ class _CurrentTempState extends State<CurrentTemp> {
             style: TextStyle(
               color: UtilColors.secondColor,
             ),
-            presetFontSizes: [UtilString.fontSizeWeatherDesc, 18, 16, 14, 12, 10],
+            presetFontSizes: [
+              UtilString.fontSizeWeatherDesc,
+              18,
+              16,
+              14,
+              12,
+              10
+            ],
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
@@ -105,7 +113,7 @@ class _CurrentTempState extends State<CurrentTemp> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text("Slide"),
+                Text(widget.slideName),
                 for (int i = 0; i < ViewWidget.length; i++)
                   if (i == _currentPage) SlideDots(true) else SlideDots(false)
               ],

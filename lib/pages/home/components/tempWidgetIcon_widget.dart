@@ -21,12 +21,13 @@ class TempWidgetIcon extends StatelessWidget {
       height: double.maxFinite,
       child: Column(
         children: [
-          Expanded(
-            flex: 8,
+          Container(
+            height: MediaQuery.of(context).size.width * 0.3,
+            width: MediaQuery.of(context).size.width * 0.3,
             child: BoxedIcon(
               WeatherIcons.fromString(ConvertToWeatherIcons().conv(weatherIcon),
                   fallback: WeatherIcons.na),
-              size: MediaQuery.of(context).size.width * 0.2,
+              size: MediaQuery.of(context).size.width * 0.23,
               color: Colors.green,
             ),
           ),
@@ -37,14 +38,15 @@ class TempWidgetIcon extends StatelessWidget {
               padding: EdgeInsets.all(5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   AutoSizeText(
                     temp,
                     style: TextStyle(
                       color: UtilColors.secondColor,
-                      fontSize: 150,
                       fontWeight: FontWeight.w400,
                     ),
+                    presetFontSizes: [85, 83, 81, 79, 77, 75],
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -53,8 +55,8 @@ class TempWidgetIcon extends StatelessWidget {
                       "o",
                       style: TextStyle(
                         color: UtilColors.secondColor,
-                        fontSize: 50,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 30,
+                        fontWeight: FontWeight.w400,
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
