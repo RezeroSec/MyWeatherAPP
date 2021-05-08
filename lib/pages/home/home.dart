@@ -71,36 +71,25 @@ class _HomeState extends State<Home> {
               children: [
                 Column(
                   children: [
-                    Expanded(
-                      flex: 11,
-                      child: Column(
-                        children: [
-                          Expanded(
-                            flex: 12,
-                            // child: Container(),
-                            child: Obx(
-                              () => CurrentTemp(
-                                location:
-                                    locationController.currentLocation.value,
-                                weatherDesc:
-                                    weatherController.isDataComplite.value
-                                        ? weatherController.currentWeather.value
-                                            .weather[0].description
-                                        : "null",
-                                weatherIcon:
-                                    weatherController.isDataComplite.value
-                                        ? weatherController.currentWeather.value
-                                            .weather[0].icon
-                                        : "null",
-                                temp: weatherController.isDataComplite.value
-                                    ? weatherController
-                                        .currentWeather.value.temp
-                                        .toString()
-                                    : "-",
-                              ),
-                            ),
-                          ),
-                        ],
+                    Obx(
+                      () => Container(
+                        height: h * 0.35,
+                        width: double.maxFinite,
+                        child: CurrentTemp(
+                          location: locationController.currentLocation.value,
+                          weatherDesc: weatherController.isDataComplite.value
+                              ? weatherController
+                                  .currentWeather.value.weather[0].description
+                              : "null",
+                          weatherIcon: weatherController.isDataComplite.value
+                              ? weatherController
+                                  .currentWeather.value.weather[0].icon
+                              : "null",
+                          temp: weatherController.isDataComplite.value
+                              ? weatherController.currentWeather.value.temp
+                                  .toString()
+                              : "-",
+                        ),
                       ),
                     ),
                     Divider(

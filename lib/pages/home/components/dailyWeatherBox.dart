@@ -29,56 +29,55 @@ class DailyWeatherBox extends StatelessWidget {
       width: 80,
       child: Column(
         children: [
-          Expanded(
-            flex: 2,
-            child: Container(
-              width: double.maxFinite,
-              alignment: Alignment.center,
-              margin: EdgeInsets.only(top: 5),
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(width: 0.1, color: Color(0xff5E6B7F)),
-                ),
+          Container(
+            height: 35,
+            width: double.maxFinite,
+            alignment: Alignment.center,
+            margin: EdgeInsets.only(top: 5),
+            decoration: BoxDecoration(
+              border: Border(
+                top: BorderSide(width: 0.1, color: Color(0xff5E6B7F)),
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    day,
-                    style: TextStyle(
-                      fontSize: 14,
-                    ),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  day,
+                  style: TextStyle(
+                    fontSize: 12,
                   ),
-                  SizedBox(height: h * 0.005),
-                  Text(
-                    date,
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.grey[400],
-                    ),
-                  )
-                ],
-              ),
+                ),
+                SizedBox(height: 3),
+                Text(
+                  date,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey[400],
+                  ),
+                )
+              ],
             ),
           ),
           Expanded(
-              flex: 4,
+              flex: 8,
               child: Container(
                 width: double.maxFinite,
                 padding: EdgeInsets.only(top: 5),
+                alignment: Alignment.bottomCenter,
                 decoration: BoxDecoration(
                   border: Border(
                     top: BorderSide(width: 0.1, color: Color(0xff5E6B7F)),
                   ),
                 ),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     BoxedIcon(
                       WeatherIcons.fromString(
                           ConvertToWeatherIcons().conv(weatherIcon),
                           fallback: WeatherIcons.na),
-                      size: MediaQuery.of(context).size.width * 0.046,
+                      size: MediaQuery.of(context).size.height * 0.025,
                       color: Colors.green,
                     ),
                     Text(
@@ -89,7 +88,7 @@ class DailyWeatherBox extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      height: h * 0.06,
+                      height: h * 0.027,
                       width: 10,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(3),
@@ -114,7 +113,7 @@ class DailyWeatherBox extends StatelessWidget {
                 ),
               )),
           Expanded(
-            flex: 2,
+            flex: 3,
             child: Container(
               width: double.maxFinite,
               alignment: Alignment.center,
@@ -127,7 +126,6 @@ class DailyWeatherBox extends StatelessWidget {
                       fontSize: 10,
                     ),
                   ),
-                  SizedBox(height: h * 0.005),
                   Text(
                     "$windSpeed m/s",
                     style: TextStyle(

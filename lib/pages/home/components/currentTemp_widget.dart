@@ -93,8 +93,8 @@ class _CurrentTempState extends State<CurrentTemp> {
             overflow: TextOverflow.ellipsis,
           ),
         ),
-        Expanded(
-          flex: 2,
+        Container(
+          height: 20,
           child: AutoSizeText(
             widget.weatherDesc,
             style: TextStyle(
@@ -113,54 +113,53 @@ class _CurrentTempState extends State<CurrentTemp> {
           ),
         ),
         Expanded(
-          flex: 18,
           child: PageView(
             physics: NeverScrollableScrollPhysics(),
             controller: _pageController,
             children: ViewWidget,
           ),
         ),
-        Expanded(
-          flex: 2,
-          child: Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                CustomButton(
-                  height: 30,
-                  width: 60,
-                  bgColor: isBottomIconTap[0] ? Colors.green : Colors.white,
-                  borderColor: Colors.green,
-                  widthBorder: 1,
-                  child: Text(
-                    "current",
-                    style: TextStyle(
-                      color: isBottomIconTap[0] ? Colors.white : Colors.green,
-                    ),
+        Container(
+          height: 20,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              CustomButton(
+                height: 30,
+                width: 60,
+                bgColor: isBottomIconTap[0] ? Colors.green : Colors.white,
+                borderColor: Colors.green,
+                widthBorder: 1,
+                child: Text(
+                  "current",
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: isBottomIconTap[0] ? Colors.white : Colors.green,
                   ),
-                  onTap: () {
-                    _onItemTapped(0);
-                  },
                 ),
-                SizedBox(width: 10),
-                CustomButton(
-                  height: 30,
-                  width: 60,
-                  bgColor: isBottomIconTap[1] ? Colors.green : Colors.white,
-                  borderColor: Colors.green,
-                  widthBorder: 1,
-                  child: Text(
-                    "daily",
-                    style: TextStyle(
-                      color: isBottomIconTap[1] ? Colors.white : Colors.green,
-                    ),
+                onTap: () {
+                  _onItemTapped(0);
+                },
+              ),
+              SizedBox(width: 10),
+              CustomButton(
+                height: 30,
+                width: 60,
+                bgColor: isBottomIconTap[1] ? Colors.green : Colors.white,
+                borderColor: Colors.green,
+                widthBorder: 1,
+                child: Text(
+                  "daily",
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: isBottomIconTap[1] ? Colors.white : Colors.green,
                   ),
-                  onTap: () {
-                    _onItemTapped(1);
-                  },
                 ),
-              ],
-            ),
+                onTap: () {
+                  _onItemTapped(1);
+                },
+              ),
+            ],
           ),
         ),
       ],

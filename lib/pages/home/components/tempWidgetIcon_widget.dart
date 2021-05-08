@@ -22,23 +22,24 @@ class TempWidgetIcon extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            height: MediaQuery.of(context).size.width * 0.3,
-            width: MediaQuery.of(context).size.width * 0.3,
+            height: MediaQuery.of(context).size.width * 0.2,
+            width: MediaQuery.of(context).size.width * 0.2,
+            alignment: Alignment.center,
             child: BoxedIcon(
               WeatherIcons.fromString(ConvertToWeatherIcons().conv(weatherIcon),
                   fallback: WeatherIcons.na),
-              size: MediaQuery.of(context).size.width * 0.23,
+              size: MediaQuery.of(context).size.width * 0.14,
               color: Colors.green,
             ),
           ),
           Expanded(
-            flex: 12,
             child: Container(
+              height: double.maxFinite,
+              width: double.maxFinite,
               alignment: Alignment.center,
-              padding: EdgeInsets.all(5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                // crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   AutoSizeText(
                     temp,
@@ -46,7 +47,7 @@ class TempWidgetIcon extends StatelessWidget {
                       color: UtilColors.secondColor,
                       fontWeight: FontWeight.w400,
                     ),
-                    presetFontSizes: [85, 83, 81, 79, 77, 75],
+                    presetFontSizes: [62, 59, 57, 55],
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
